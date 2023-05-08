@@ -1,4 +1,5 @@
 var search = "";
+var searchBtn = document.querySelector(".search-button");
 
 function getWeather(data) {
   var apiKey = "eac8b0ada86d323c106004da27e70b99";
@@ -45,4 +46,10 @@ function getWeather(data) {
     });
 }
 
-getWeather();
+
+searchBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+    getWeather();
+})
+
+// searchBtn.on("click", getWeather)
