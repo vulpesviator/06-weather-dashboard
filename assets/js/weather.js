@@ -6,6 +6,9 @@ var cityName = "Chicago";
 var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
 
 
+function getWeather(data) {
+
+var currentTemp = document.querySelector("#current-temp")
 
 fetch(apiUrl)
     .then(function (response) {
@@ -13,4 +16,10 @@ fetch(apiUrl)
     })
     .then(function (data) {
         console.log(data);
+
+        var selectedCityTemp = data.main.temp;
+        currentTemp.textContent(`${selectedCityTemp}\&deg;`)
     })
+}
+
+getWeather();
