@@ -1,11 +1,15 @@
+$(function () {
+
 var search = "";
-var searchBtn = document.querySelector(".search-button");
+var searchBtn = $(".search-button");
+var clearBtn = $(".clear-button")
+var citySearch = $(".city-search");
 
 function getWeather(data) {
   var apiKey = "eac8b0ada86d323c106004da27e70b99";
-  var lat = "41.948438";
-  var lon = "-87.655333";
-  var cityName = "Chicago";
+  // var lat = "41.948438";
+  // var lon = "-87.655333";
+  var cityName = citySearch.val().trim();;
   var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=imperial`;
 
   var currentTemp = document.querySelector("#current-temp");
@@ -46,10 +50,6 @@ function getWeather(data) {
     });
 }
 
+searchBtn.on("click", getWeather);
 
-searchBtn.addEventListener("click", function(event) {
-    event.preventDefault();
-    getWeather();
-})
-
-// searchBtn.on("click", getWeather)
+});
