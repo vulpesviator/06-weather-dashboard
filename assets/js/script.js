@@ -1,6 +1,5 @@
 $(function () {
 
-var search = "";
 var searchBtn = $(".search-button");
 var clearBtn = $(".clear-button")
 var citySearch = $(".city-search");
@@ -10,6 +9,7 @@ function getWeather(data) {
   
   var cityName = citySearch.val().trim();;
   var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=imperial`;
+  var savedCities = JSON.parse(localStorage.getItem("cities")) || [];
 
   var currentTemp = document.querySelector("#current-temp");
   var currentCity = document.querySelector("#current-city");
@@ -24,6 +24,19 @@ function getWeather(data) {
     .then(function (response) {
       return response.json();
     })
+    // .then(function(data) {
+    //   var cityInfo = {
+    //     city: cityName,
+    //     lat: data.coord.lat,
+    //     lon: data.coord.lon
+    //   }
+
+    //   savedCities.push(cityInfo);
+    //   localStorage.setItem("cities", JSON.stringify(savedCities));
+
+    //   return cityInfo;
+
+    // })
     .then(function (data) {
       console.log(data);
       var lat = data.coord.lat;
@@ -56,10 +69,10 @@ function getWeather(data) {
 }
 
 function getForecast() {
-  var apiKey = "eac8b0ada86d323c106004da27e70b99";
-  var lat = "42.3314";
-  var lon = "-83.0458";
-  var forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+  // var apiKey = "eac8b0ada86d323c106004da27e70b99";
+  // var lat = "42.3314";
+  // var lon = "-83.0458";
+  var forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`;
 
   fetch(forecastUrl)
     .then(function(response) {
