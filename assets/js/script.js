@@ -169,29 +169,28 @@ function emptyCurrentWeather () {
   var currentDate = document.querySelector("#date");
 
   currentCity.innerHTML = "";
-
   currentForecastIcon.innerHTML = "";
-
   currentTemp.innerHTML = "";
-
   currentWeatherState.innerHTML = "";
-
   currentHighTemp.innerHTML = "";
-
   currentLowTemp.innerHTML = "";
-
   currentWindSpeed.innerHTML = "";
-
   currentHumidity.innerHTML = "";
-
   currentDate.innerHTML = dayjs().format("dddd, MMMM D, YYYY");
-  
   var forecastList = document.querySelector("#forecast-list");
   forecastList.innerHTML = "";
 
   return;
 }
 
+function clearHistory (event) {
+  event.preventDefault();
+  var cityHistory = document.getElementById("history");
+  cityHistory.innerHTML = "";
+  localStorage.removeItem("cities")
+}
+
 searchBtn.on("click", getWeather);
+clearBtn.on("click", clearHistory);
 
 });
