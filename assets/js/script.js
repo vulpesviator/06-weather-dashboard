@@ -12,6 +12,7 @@ function getWeather(data) {
   var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=imperial`;
   var savedCities = JSON.parse(localStorage.getItem("cities")) || [];
   
+  var currentForecastIcon = document.querySelector("#current-forecast-icon")
   var currentTemp = document.querySelector("#current-temp");
   var currentCity = document.querySelector("#current-city");
   var currentWeatherState = document.querySelector("#weather-state");
@@ -29,6 +30,8 @@ function getWeather(data) {
       console.log(data);
       
       currentCity.innerHTML = data.name;
+
+      currentForecastIcon.innerHTML = `<img src= "http://openweathermap.org/img/wn/${data.weather[0].icon}.png">`
 
       var selectedCityTemp = Math.round(data.main.temp);
       currentTemp.innerHTML = `${selectedCityTemp}\&deg;`;
@@ -76,6 +79,51 @@ function getForecast(apiKey, cityName, lat, lon) {
     })
     .then(function(data) {
       console.log(data);
+      console.log(data.list[0].main.temp);
+      console.log(dayjs.unix(data.list[0].dt).format("ddd"));
+
+      var array = [2, 10, 18, 26, 34]
+
+      var selectedItems = data.list.filter(function(item, index) {
+        return array.includes(index);
+      });
+
+      selectedItems.forEach(function(item) {
+        var day = dayjs.unix(item.dt).format("ddd");
+        var icon = item.weather[0].icon;
+        var forecast = item.weather[0].description;
+        var temp = Math.round(item.main.temp);
+        var maxTemp = Math.round(item.main.temp_max);
+        var minTemp = Math.round(item.main.temp_min);
+    
+        var forecastList = document.querySelector("#forecast-list");
+    
+        var cardContainer = document.createElement("div");
+        cardContainer.classList.add('card', 'col-lg-2','col-md-12');
+    
+        var cardBody = document.createElement("div");
+        cardBody.classList.add('card-body');
+    
+        var card = document.createElement("div");
+        card.classList.add('col-12');
+        card.innerHTML = `<div>
+                            <h5 id="forecast-day" class="card-title">${day}</h5>
+                          </div>
+                          <div>
+                          <img src= "http://openweathermap.org/img/wn/${icon}.png">
+                          </div>
+                          <div>
+                              <p id="forecast-1">${forecast}</p>
+                          </div>
+                          <div id="forecast-temp">
+                              <h4>${temp}\&deg;</h4>
+                              <p class="card-text">${maxTemp}\&deg; High/${minTemp}\&deg; Low</p>
+                          </div>`
+    
+        cardBody.appendChild(card);
+        cardContainer.appendChild(cardBody);
+        forecastList.appendChild(cardContainer);
+      })
     })
 }
 
