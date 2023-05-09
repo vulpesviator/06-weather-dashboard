@@ -1,4 +1,33 @@
 * {
     font-family: 'IBM Plex Sans', Arial, Helvetica, sans-serif;
     font-weight: 400;
+    font-size: 16px;
+}
+
+h1 {
+    font-size: 3em;
+    font-weight: 700;
+}
+
+#current-forecast-icon img {
+    width: 100%;
+}
+
+#current-temp {
+    font-size: 4em;
+    font-weight: 700;
+}
+
+.temp-system {
+    font-size: .5em;
+}
+
+.current-city {
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.current-date {
+    font-size: 1em;
+    font-style: italic;
 }
