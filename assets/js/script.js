@@ -49,7 +49,7 @@ $(function () {
           document.querySelector("#current-weather");
 
         var tempInfo = document.createElement("div");
-        tempInfo.classList.add("col-md-4");
+        tempInfo.classList.add("col-12", "col-md-6");
         tempInfo.innerHTML = `<div class="row align-items-center justify-content-center">
                         <div id="current-forecast-icon" class="col-md-6">
                         <img src="http://openweathermap.org/img/wn/${currentForecastIcon}.png">
@@ -65,17 +65,17 @@ $(function () {
                         </div>`;
 
         var forecastInfo = document.createElement("div");
-        forecastInfo.classList.add("col-md-8", "text-start");
-        forecastInfo.innerHTML = `<div class="col-md-4">
+        forecastInfo.classList.add("col-12", "col-md-6", "text-start");
+        forecastInfo.innerHTML = `<div class="col-12">
                             <div class="row">
                                 <div class="col-md-6" id="current-high">${currentHighTemp}\&deg; High</div>
                                 <div class="col-md-6" id="current-low">${currentLowTemp}\&deg; Low</div>
                             </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-12">
                             <p id="current-wind-speed">Wind: ${currentWindSpeed} MPH</p>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-12">
                             <p id="current-humidity">Humidity: ${currentHumidity}%</p>
                             </div>`;
 
