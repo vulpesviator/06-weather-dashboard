@@ -3,14 +3,15 @@ $(function () {
 var searchBtn = $(".search-button");
 var clearBtn = $(".clear-button")
 var citySearch = $(".city-search");
+var apiKey = "eac8b0ada86d323c106004da27e70b99";
+
 
 function getWeather(data) {
-  var apiKey = "eac8b0ada86d323c106004da27e70b99";
-  
+   
   var cityName = citySearch.val().trim();;
   var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=imperial`;
   var savedCities = JSON.parse(localStorage.getItem("cities")) || [];
-
+  
   var currentTemp = document.querySelector("#current-temp");
   var currentCity = document.querySelector("#current-city");
   var currentWeatherState = document.querySelector("#weather-state");
@@ -24,26 +25,9 @@ function getWeather(data) {
     .then(function (response) {
       return response.json();
     })
-    // .then(function(data) {
-    //   var cityInfo = {
-    //     city: cityName,
-    //     lat: data.coord.lat,
-    //     lon: data.coord.lon
-    //   }
-
-    //   savedCities.push(cityInfo);
-    //   localStorage.setItem("cities", JSON.stringify(savedCities));
-
-    //   return cityInfo;
-
-    // })
-    .then(function (data) {
+    .then(function(data) {
       console.log(data);
-      var lat = data.coord.lat;
-      var lon = data.coord.lon;
-      console.log(lat);
-      console.log(lon);
-
+      
       currentCity.innerHTML = data.name;
 
       var selectedCityTemp = Math.round(data.main.temp);
@@ -64,15 +48,27 @@ function getWeather(data) {
 
       currentDate.innerHTML = dayjs().format("dddd, MMMM D, YYYY");
 
-      getForecast();
+      var cityInfo = {
+        city: cityName,
+        lat: data.coord.lat,
+        lon: data.coord.lon
+      }
+
+      savedCities.push(cityInfo);
+      localStorage.setItem("cities", JSON.stringify(savedCities));
+
+      getForecast(apiKey, cityName, cityInfo.lat, cityInfo.lon);
+
+      return cityInfo;
+    
     });
 }
 
-function getForecast() {
-  // var apiKey = "eac8b0ada86d323c106004da27e70b99";
-  // var lat = "42.3314";
-  // var lon = "-83.0458";
+function getForecast(apiKey, cityName, lat, lon) {
+  
   var forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`;
+
+  console.log(cityName);
 
   fetch(forecastUrl)
     .then(function(response) {
