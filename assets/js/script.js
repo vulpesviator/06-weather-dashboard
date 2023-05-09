@@ -6,8 +6,11 @@ var citySearch = $(".city-search");
 var apiKey = "eac8b0ada86d323c106004da27e70b99";
 
 
+
 function getWeather(data) {
-   
+  
+  emptyCurrentWeather();
+  
   var cityName = citySearch.val().trim();;
   var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=imperial`;
   var savedCities = JSON.parse(localStorage.getItem("cities")) || [];
@@ -61,10 +64,14 @@ function getWeather(data) {
       localStorage.setItem("cities", JSON.stringify(savedCities));
 
       getForecast(apiKey, cityName, cityInfo.lat, cityInfo.lon);
+      
+      displayHistory();
 
       return cityInfo;
     
     });
+
+    
 }
 
 function getForecast(apiKey, cityName, lat, lon) {
@@ -82,7 +89,7 @@ function getForecast(apiKey, cityName, lat, lon) {
       console.log(data.list[0].main.temp);
       console.log(dayjs.unix(data.list[0].dt).format("ddd"));
 
-      var array = [2, 10, 18, 26, 34]
+      var array = [5, 13, 21, 29, 37]
 
       var selectedItems = data.list.filter(function(item, index) {
         return array.includes(index);
@@ -133,6 +140,56 @@ function getForecast(apiKey, cityName, lat, lon) {
         forecastList.appendChild(cardContainer);
       })
     })
+}
+
+function displayHistory() {
+  var savedCities = JSON.parse(localStorage.getItem("cities")) || [];
+  var cityHistory = document.getElementById("history");
+
+  cityHistory.innerHTML = "";
+
+  for (i = 0; i < savedCities.length; i++) {
+    var historyBtn = document.createElement("button");
+    historyBtn.classList.add("btn", "btn-primary", "my-2", "history-city");
+    historyBtn.innerHTML = `${savedCities[i].city}`;
+    cityHistory.appendChild(historyBtn);
+  }
+  return;
+};
+
+function emptyCurrentWeather () {
+  var currentForecastIcon = document.querySelector("#current-forecast-icon")
+  var currentTemp = document.querySelector("#current-temp");
+  var currentCity = document.querySelector("#current-city");
+  var currentWeatherState = document.querySelector("#weather-state");
+  var currentHighTemp = document.querySelector("#current-high");
+  var currentLowTemp = document.querySelector("#current-low");
+  var currentWindSpeed = document.querySelector("#current-wind-speed");
+  var currentHumidity = document.querySelector("#current-humidity");
+  var currentDate = document.querySelector("#date");
+
+  currentCity.innerHTML = "";
+
+  currentForecastIcon.innerHTML = "";
+
+  currentTemp.innerHTML = "";
+
+  currentWeatherState.innerHTML = "";
+
+  currentHighTemp.innerHTML = "";
+
+  currentLowTemp.innerHTML = "";
+
+  currentWindSpeed.innerHTML = "";
+
+  currentHumidity.innerHTML = "";
+
+  currentDate.innerHTML = dayjs().format("dddd, MMMM D, YYYY");
+  
+  var forecastList = document.querySelector("#forecast-list");
+  forecastList.innerHTML = "";
+
+  return;
 }
 
 searchBtn.on("click", getWeather);
