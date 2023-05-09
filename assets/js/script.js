@@ -95,6 +95,8 @@ function getForecast(apiKey, cityName, lat, lon) {
         var temp = Math.round(item.main.temp);
         var maxTemp = Math.round(item.main.temp_max);
         var minTemp = Math.round(item.main.temp_min);
+        var windSpeed = Math.round(item.wind.speed);
+        var forecastHumidity = item.main.humidity;
     
         var forecastList = document.querySelector("#forecast-list");
     
@@ -117,7 +119,13 @@ function getForecast(apiKey, cityName, lat, lon) {
                           </div>
                           <div id="forecast-temp">
                               <h4>${temp}\&deg;</h4>
-                              <p class="card-text">${maxTemp}\&deg; High/${minTemp}\&deg; Low</p>
+                              <p class="card-text">${maxTemp}\&deg; H/${minTemp}\&deg; L</p>
+                          </div>
+                          <div>
+                            <p class="f-wind-speed">Wind: ${windSpeed} MPH</p>
+                          </div>
+                          <div>
+                            <p class="f-humidity">Hum: ${forecastHumidity}%</p>
                           </div>`
     
         cardBody.appendChild(card);
