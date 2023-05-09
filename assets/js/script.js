@@ -56,10 +56,6 @@ $(function () {
                         </div>
                         <div class="col-md-6">
                             <h3 id="current-temp">${currentTemp}\&deg; <span class="temp-system">F</span></h3>
-                        </div>
-                        </div>
-                        <div class="row">
-                        <div class="pb-3 text-center">
                             <p id="weather-state">${currentWeatherState}</p>
                         </div>
                         </div>`;
@@ -68,15 +64,17 @@ $(function () {
         forecastInfo.classList.add("col-12", "col-md-6", "text-start");
         forecastInfo.innerHTML = `<div class="col-12">
                             <div class="row">
-                                <div class="col-md-6" id="current-high">${currentHighTemp}\&deg; High</div>
-                                <div class="col-md-6" id="current-low">${currentLowTemp}\&deg; Low</div>
+                                <div class="col-md-6" id="current-high"><span class="sub-heading">High </span>${currentHighTemp}\&deg;<span class="sub-heading">F</span></div>
+                                <div class="col-md-6" id="current-low"><span class="sub-heading">Low </span>${currentLowTemp}\&deg;<span class="sub-heading">F</span></div>
                             </div>
                             </div>
-                            <div class="col-12">
-                            <p id="current-wind-speed">Wind: ${currentWindSpeed} MPH</p>
+                            <div class="row">
+                            <div class="col-md-6">
+                            <p id="current-wind-speed"><span class="sub-heading">Wind:</span> ${currentWindSpeed} <span class="sub-heading">MPH</span></p>
                             </div>
-                            <div class="col-12">
-                            <p id="current-humidity">Humidity: ${currentHumidity}%</p>
+                            <div class="col-md-6">
+                            <p id="current-humidity"><span class="sub-heading">Humidity:</span> ${currentHumidity}<span class="sub-heading">%</span></p>
+                            </div>
                             </div>`;
 
         currentWeatherContainer.appendChild(tempInfo);
@@ -150,11 +148,11 @@ $(function () {
           card.innerHTML = `<div>
                             <h5 id="forecast-day" class="card-title">${day}</h5>
                           </div>
-                          <div>
+                          <div id="forecast-img">
                           <img src= "http://openweathermap.org/img/wn/${icon}.png">
                           </div>
                           <div>
-                              <p id="forecast-1">${forecast}</p>
+                              <p id="forecast-desc">${forecast}</p>
                           </div>
                           <div id="forecast-temp">
                               <h4>${temp}\&deg;</h4>
