@@ -1,13 +1,17 @@
 $(function () {
+  displayHistory();
+  
   var searchBtn = $(".search-button");
   var clearBtn = $(".clear-button");
   var citySearch = $(".city-search");
+  var historyBtn = $(".history-city");
   var apiKey = "eac8b0ada86d323c106004da27e70b99";
+  
 
-  function getWeather(data) {
+
+  function getWeather(cityName) {
     emptyCurrentWeather();
 
-    var cityName = citySearch.val().trim();
     var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=imperial`;
     var savedCities = JSON.parse(localStorage.getItem("cities")) || [];
 
@@ -85,12 +89,18 @@ $(function () {
           lon: data.coord.lon,
         };
 
-        savedCities.push(cityInfo);
+        var existingCityInfo = savedCities.find(function(savedCityInfo) {
+          return savedCityInfo.city === cityName;
+        });
+
+        if (!existingCityInfo) {
+          savedCities.push(cityInfo);
         localStorage.setItem("cities", JSON.stringify(savedCities));
+        }
 
         getForecast(apiKey, cityName, cityInfo.lat, cityInfo.lon);
 
-        displayHistory();
+        
 
         return cityInfo;
       });
@@ -171,7 +181,7 @@ $(function () {
 
     for (i = 0; i < savedCities.length; i++) {
       var historyBtn = document.createElement("button");
-      historyBtn.classList.add("btn", "btn-primary", "my-2", "history-city");
+      historyBtn.classList.add("btn", "btn-primary", "col-12", "my-2", "history-city");
       historyBtn.innerHTML = `${savedCities[i].city}`;
       cityHistory.appendChild(historyBtn);
     }
@@ -199,6 +209,19 @@ $(function () {
     localStorage.removeItem("cities");
   }
 
-  searchBtn.on("click", getWeather);
+  function historicalWeather(event) {
+    event.preventDefault();
+    var element = event.target;
+    var citySearch = element.textContent.trim();
+    getWeather(citySearch);
+  }
+  
+
+  searchBtn.on("click", function() {
+    var cityName = citySearch.val().trim();
+    getWeather(cityName);
+  });
+  
   clearBtn.on("click", clearHistory);
+  historyBtn.on("click", historicalWeather);
 });
