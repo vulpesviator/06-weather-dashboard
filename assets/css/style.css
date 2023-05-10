@@ -112,3 +112,11 @@ h1 {
     --bs-btn-disabled-border-color: orange;
     box-shadow: rgba(0, 0, 0, 0.125) 6px 6px 0px;
 }
+
+.history-city {
+    box-shadow: rgba(0, 0, 0, 0.125) 2px 2px 0px;
+}
+
+.history-city:hover {
+    box-shadow: rgba(0, 0, 0, 0.125) 6px 6px 0px;
+}
