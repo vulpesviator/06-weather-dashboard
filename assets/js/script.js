@@ -1,8 +1,7 @@
-$(function () {
   /* Displays any cities already in local storage */
   displayHistory();
 
-  var citySearch = $("#floatingInput");
+  var citySearch = $(".city-search");
   var searchBtn = $(".search-button");
   var clearBtn = $(".clear-button");
   var apiKey = "eac8b0ada86d323c106004da27e70b99";
@@ -213,6 +212,7 @@ $(function () {
   /* This function searches for the city put into the input field */
   function searchForCity(event) {
     event.preventDefault();
+    console.log(citySearch.val().trim());
     var cityName = citySearch.val().trim();
     console.log(cityName);
     getWeather(cityName);
@@ -223,4 +223,4 @@ $(function () {
   
   /* This is the event listener to clear the search history */
   clearBtn.on("click", clearHistory);
-});
+
