@@ -1,3 +1,5 @@
+$(document).ready(function () {
+  
   /* Displays any cities already in local storage */
   displayHistory();
 
@@ -212,10 +214,11 @@
   /* This function searches for the city put into the input field */
   function searchForCity(event) {
     event.preventDefault();
-    console.log(citySearch.val().trim());
+    console.log(citySearch.val());
     var cityName = citySearch.val().trim();
     console.log(cityName);
     getWeather(cityName);
+    return;
   }
   /* This is the event listener to search for a city */
   searchBtn.on("click", searchForCity);
@@ -224,3 +227,4 @@
   /* This is the event listener to clear the search history */
   clearBtn.on("click", clearHistory);
 
+});
