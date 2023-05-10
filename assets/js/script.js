@@ -210,14 +210,14 @@ $(function () {
     cityHistory.innerHTML = "";
     localStorage.removeItem("cities");
   }
-
+  /* This function searches for the city put into the input field */
   function searchForCity(event) {
     event.preventDefault();
     var cityName = citySearch.val().trim();
     console.log(cityName);
     getWeather(cityName);
   }
-
+  /* This is the event listener to search for a city */
   searchBtn.on("click", searchForCity);
 
   
