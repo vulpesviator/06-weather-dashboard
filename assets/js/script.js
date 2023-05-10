@@ -208,19 +208,17 @@ $(function () {
     localStorage.removeItem("cities");
   }
 
-  function historicalWeather(event) {
-    event.preventDefault();
-    var element = event.target;
-    var citySearch = element.textContent.trim();
-    getWeather(citySearch);
-  }
-  
-
   searchBtn.on("click", function() {
     var cityName = citySearch.val().trim();
     getWeather(cityName);
   });
   
   clearBtn.on("click", clearHistory);
-  historyBtn.on("click", historicalWeather);
+  
+  historyBtn.on("click", function(event) {
+    event.preventDefault();
+    var element = event.target;
+    var cityName = element.textContent.trim();
+    getWeather(cityName);
+  });
 });
