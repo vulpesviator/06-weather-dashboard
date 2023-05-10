@@ -31,26 +31,28 @@
             <div class="text-center">
                 <div class="p-3">
                     <h1>TravelCast</h1>
-
                 </div>
         </header>
         <!-- City search form and history list -->
         <div class="container-xxl row">
             <div class="card col-12 col-md-3 mb-3">
                 <div class="p-1 m-2">
-                <form>
-                    <div class="form-floating m-1">
-                        <input type="search" class="form-control city-search" id="floatingInput"
-                            placeholder="Search for city...">
-                        <label for="floatingInput">Search for City...</label>
+                    <!-- This is the form to search for your city -->
+                    <form>
+                        <div class="form-floating m-1">
+                            <input type="search" class="form-control city-search" id="floatingInput"
+                                placeholder="Search for city...">
+                            <label for="floatingInput">Search for City...</label>
+                        </div>
+                        <button type="button" class="btn col-12 my-3 search-button">Search</button>
+                    </form>
+                    <!-- This button clears previous searches from local storage -->
+                    <button type="button" class="btn btn-dark col-12 clear-button mb-3">Clear History</button>
+                    <!-- This div is for the buttons of previous city searches -->
+                    <div id="history">
+                        
                     </div>
-                    <button type="button" class="btn col-12 my-3 search-button">Search</button>
-                </form>
-                <button type="button" class="btn btn-dark col-12 clear-button mb-3">Clear History</button>
-                <div id="history">
-                    Past searches
                 </div>
-            </div>
             </div>
 
             <!-- Current city weather -->
@@ -58,14 +60,14 @@
                 <div class="card text-center mb-3">
                     <div class="card-header">
                         <!-- Current city label and date -->
-                        </div>
-                    
+                    </div>
+
                     <div class="card-body">
                         <div class="d-flex justify-content-center align-items-center">
-                        <div id="current-weather" class="row col-12 col-lg-8 text-center">
-                        <!-- Current forecast for city    -->
+                            <div id="current-weather" class="row col-12 col-lg-8 text-center">
+                                <!-- Current forecast for city    -->
 
-                        </div>
+                            </div>
                         </div>
                         <!-- 5 day upcoming forecast for selected city -->
                         <div id="forecast-list" class="row d-flex justify-content-center">
