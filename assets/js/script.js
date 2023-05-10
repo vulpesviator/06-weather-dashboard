@@ -184,7 +184,11 @@ $(function () {
       historyBtn.innerHTML = `${savedCities[i].city}`;
       cityHistory.appendChild(historyBtn);
     }
-    return;
+    $(".history-city").on("click", function (event) {
+      event.preventDefault();
+      var cityName = $(this).text();
+      getWeather(cityName);
+    });
   }
 
   function emptyCurrentWeather() {
@@ -215,10 +219,4 @@ $(function () {
   
   clearBtn.on("click", clearHistory);
   
-  historyBtn.on("click", function(event) {
-    event.preventDefault();
-    var element = event.target;
-    var cityName = element.textContent.trim();
-    getWeather(cityName);
-  });
 });
