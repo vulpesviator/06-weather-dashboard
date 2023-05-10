@@ -1,8 +1,9 @@
-$(function () {
+$(document).ready(function () {
+  
   /* Displays any cities already in local storage */
   displayHistory();
 
-  var citySearch = $("#floatingInput");
+  var citySearch = $(".city-search");
   var searchBtn = $(".search-button");
   var clearBtn = $(".clear-button");
   var apiKey = "eac8b0ada86d323c106004da27e70b99";
@@ -210,17 +211,20 @@ $(function () {
     cityHistory.innerHTML = "";
     localStorage.removeItem("cities");
   }
-
+  /* This function searches for the city put into the input field */
   function searchForCity(event) {
     event.preventDefault();
+    console.log(citySearch.val());
     var cityName = citySearch.val().trim();
     console.log(cityName);
     getWeather(cityName);
+    return;
   }
-
+  /* This is the event listener to search for a city */
   searchBtn.on("click", searchForCity);
 
   
   /* This is the event listener to clear the search history */
   clearBtn.on("click", clearHistory);
+
 });
