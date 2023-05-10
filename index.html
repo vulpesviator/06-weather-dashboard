@@ -29,71 +29,43 @@
     <div class="container-xxl">
         <header>
             <div class="text-center">
-                <div>
+                <div class="p-3">
                     <h1>TravelCast</h1>
 
                 </div>
         </header>
         <!-- City search form and history list -->
-        <div class="row">
-            <div class="column col-12 col-md-3">
+        <div class="container-xxl row">
+            <div class="card col-12 col-md-3 mb-3">
+                <div class="p-1 m-2">
                 <form>
-                    <div class="form-floating mb-3">
+                    <div class="form-floating m-1">
                         <input type="search" class="form-control city-search" id="floatingInput"
                             placeholder="Search for city...">
                         <label for="floatingInput">Search for City...</label>
                     </div>
-                    <button type="button" class="btn btn-primary col-12 my-3 search-button">Search</button>
+                    <button type="button" class="btn col-12 my-3 search-button">Search</button>
                 </form>
-                <button type="button" class="btn btn-info col-12 clear-button my-3">Clear History</button>
+                <button type="button" class="btn btn-dark col-12 clear-button mb-3">Clear History</button>
                 <div id="history">
                     Past searches
                 </div>
             </div>
+            </div>
 
             <!-- Current city weather -->
             <div class="col-12 col-md-9">
-                <div class="card text-center">
+                <div class="card text-center mb-3">
                     <div class="card-header">
-                        <div id="current-city"></div>
-
-
-                        <div id="date" class="text-muted">
+                        <!-- Current city label and date -->
                         </div>
-                    </div>
+                    
                     <div class="card-body">
-                        <div id="current-weather" class="row">
-                            <!-- <div class="col-md-4">
-                                <div class="row align-items-center justify-content-center">
-                                    <div id="current-forecast-icon" class="col-md-6">
+                        <div class="d-flex justify-content-center align-items-center">
+                        <div id="current-weather" class="row col-12 col-lg-8 text-center">
+                        <!-- Current forecast for city    -->
 
-                                    </div>
-                                    <div class="col-md-6">
-                                        <h3 id="current-temp"><span class="temp-system">F</span></h3>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="pb-3">
-                                        <p id="weather-state"></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-8 text-start">
-
-                                <div class="col-md-4">
-                                    <div class="row">
-                                        <div class="col-md-6" id="current-high">High</div>
-                                        <div class="col-md-6" id="current-low">Low</div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <p id="current-wind-speed"></p>
-                                </div>
-                                <div class="col-md-4">
-                                    <p id="current-humidity"></p>
-                                </div>
-                            </div> -->
-
+                        </div>
                         </div>
                         <!-- 5 day upcoming forecast for selected city -->
                         <div id="forecast-list" class="row d-flex justify-content-center">

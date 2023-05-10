@@ -1,4 +1,5 @@
 $(function () {
+  /* Displays any cities already in local storage */
   displayHistory();
   
   var searchBtn = $(".search-button");
@@ -27,11 +28,11 @@ $(function () {
         var cardHeader = document.querySelector(".card-header");
 
         var cityContainer = document.createElement("div");
-        // cityContainer.classList.add("");
+        cityContainer.classList.add("current-city");
         cityContainer.innerHTML = `${currentCity}`;
 
         var dateContainer = document.createElement("div");
-        // dateContainer.classList.add("");
+        dateContainer.classList.add("current-date");
         dateContainer.innerHTML = `${currentDate}`;
 
         cardHeader.appendChild(cityContainer);
@@ -48,34 +49,32 @@ $(function () {
           document.querySelector("#current-weather");
 
         var tempInfo = document.createElement("div");
-        tempInfo.classList.add("col-md-4");
+        tempInfo.classList.add("col-12", "col-md-6");
         tempInfo.innerHTML = `<div class="row align-items-center justify-content-center">
                         <div id="current-forecast-icon" class="col-md-6">
-                        <img src= "http://openweathermap.org/img/wn/${currentForecastIcon}.png">
+                        <img src="http://openweathermap.org/img/wn/${currentForecastIcon}.png">
                         </div>
                         <div class="col-md-6">
-                            <h3 id="current-temp">${currentTemp}<span class="temp-system">F</span></h3>
-                        </div>
-                        </div>
-                        <div class="row">
-                        <div class="pb-3">
+                            <h3 id="current-temp">${currentTemp}\&deg; <span class="temp-system">F</span></h3>
                             <p id="weather-state">${currentWeatherState}</p>
                         </div>
                         </div>`;
 
         var forecastInfo = document.createElement("div");
-        forecastInfo.classList.add("col-md-8", "text-start");
-        forecastInfo.innerHTML = `<div class="col-md-4">
+        forecastInfo.classList.add("col-12", "col-md-6", "text-start");
+        forecastInfo.innerHTML = `<div class="col-12">
                             <div class="row">
-                                <div class="col-md-6" id="current-high">${currentHighTemp} High</div>
-                                <div class="col-md-6" id="current-low">${currentLowTemp} Low</div>
+                                <div class="col-md-6" id="current-high"><span class="sub-heading">High </span>${currentHighTemp}\&deg;<span class="sub-heading">F</span></div>
+                                <div class="col-md-6" id="current-low"><span class="sub-heading">Low </span>${currentLowTemp}\&deg;<span class="sub-heading">F</span></div>
                             </div>
                             </div>
-                            <div class="col-md-4">
-                            <p id="current-wind-speed">${currentWindSpeed}</p>
+                            <div class="row">
+                            <div class="col-md-6">
+                            <p id="current-wind-speed"><span class="sub-heading">Wind:</span> ${currentWindSpeed} <span class="sub-heading">MPH</span></p>
                             </div>
-                            <div class="col-md-4">
-                            <p id="current-humidity">${currentHumidity}</p>
+                            <div class="col-md-6">
+                            <p id="current-humidity"><span class="sub-heading">Humidity:</span> ${currentHumidity}<span class="sub-heading">%</span></p>
+                            </div>
                             </div>`;
 
         currentWeatherContainer.appendChild(tempInfo);
@@ -100,7 +99,7 @@ $(function () {
 
         getForecast(apiKey, cityName, cityInfo.lat, cityInfo.lon);
 
-        
+        displayHistory();
 
         return cityInfo;
       });
@@ -139,7 +138,7 @@ $(function () {
           var forecastList = document.querySelector("#forecast-list");
 
           var cardContainer = document.createElement("div");
-          cardContainer.classList.add("card", "col-lg-2", "col-md-12");
+          cardContainer.classList.add("card", "col-lg-2", "col-md-12", "m-3");
 
           var cardBody = document.createElement("div");
           cardBody.classList.add("card-body");
@@ -149,11 +148,11 @@ $(function () {
           card.innerHTML = `<div>
                             <h5 id="forecast-day" class="card-title">${day}</h5>
                           </div>
-                          <div>
+                          <div id="forecast-img">
                           <img src= "http://openweathermap.org/img/wn/${icon}.png">
                           </div>
                           <div>
-                              <p id="forecast-1">${forecast}</p>
+                              <p id="forecast-desc">${forecast}</p>
                           </div>
                           <div id="forecast-temp">
                               <h4>${temp}\&deg;</h4>
@@ -209,19 +208,17 @@ $(function () {
     localStorage.removeItem("cities");
   }
 
-  function historicalWeather(event) {
-    event.preventDefault();
-    var element = event.target;
-    var citySearch = element.textContent.trim();
-    getWeather(citySearch);
-  }
-  
-
   searchBtn.on("click", function() {
     var cityName = citySearch.val().trim();
     getWeather(cityName);
   });
   
   clearBtn.on("click", clearHistory);
-  historyBtn.on("click", historicalWeather);
+  
+  historyBtn.on("click", function(event) {
+    event.preventDefault();
+    var element = event.target;
+    var cityName = element.textContent.trim();
+    getWeather(cityName);
+  });
 });
